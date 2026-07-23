@@ -31,7 +31,7 @@
   <!-- Preconnect to external resources -->
   <link href='https://fonts.googleapis.com' rel='preconnect'/>
   <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
-  <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap' rel='stylesheet'/>
+  <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap' rel='stylesheet'/>
   
   <!-- Theme CSS -->
   <b:skin><![CDATA[
@@ -1992,7 +1992,102 @@ ul, ol {
   }
 }
 
-  ]]></b:skin>
+  
+/* ============================================
+   PIXELOS GRADIENTS & MONOGRAM FALLBACKS
+   ============================================ */
+.blog-post__image--gradient {
+  background: linear-gradient(135deg, #4285f4, #34a853, #fabc05, #ea4335);
+  background-size: 300% 300%;
+  animation: monetMesh 12s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 10;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .blog-post__image--gradient {
+  background: linear-gradient(135deg, #1a73e8, #1557b0, #18191e, #1f2026);
+  background-size: 300% 300%;
+}
+
+.featured-post__image--gradient {
+  background: linear-gradient(135deg, #4285f4, #8ab4f8, #c2e7ff);
+  background-size: 300% 300%;
+  animation: monetMesh 12s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .featured-post__image--gradient {
+  background: linear-gradient(135deg, #18191e, #1a73e8, #2d2e30);
+  background-size: 300% 300%;
+}
+
+@keyframes monetMesh {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.blog-post__monogram {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  user-select: none;
+  font-family: var(--font);
+}
+
+.featured-post__monogram {
+  font-size: 6rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  font-family: var(--font);
+}
+
+.blog-post__image--gradient .blog-post__category {
+  z-index: 2;
+}
+
+.navbar__logo-icon {
+  background: linear-gradient(135deg, #1a73e8 0%, #34a853 100%) !important;
+}
+
+.btn--primary {
+  box-shadow: 0 4px 15px rgba(26, 115, 232, 0.2) !important;
+}
+
+.btn--primary:hover {
+  box-shadow: 0 8px 25px rgba(26, 115, 232, 0.3) !important;
+}
+
+.blog-post {
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.blog-post:hover {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.featured-post {
+  border-radius: var(--radius-xl2) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.featured-post:hover {
+  box-shadow: var(--shadow-xl) !important;
+}
+]]></b:skin>
 </head>
 <body>
   <!-- Scroll Progress Bar -->
@@ -2084,129 +2179,151 @@ ul, ol {
   <main class='main-content'>
     <b:section class='main' id='main' showaddelement='no'>
       <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='2' visible='true'>
-        <b:includable id='main' var='this'>
-          <b:loop values='data:posts' var='post'>
-            <b:if cond='data:view.isHomepage'>
-              <!-- Homepage -->
-              <b:include data='post' name='homepage-posts'/>
-            <b:elseif cond='data:view.isPost'/>
-              <!-- Single Post -->
+                <b:includable id='main' var='this'>
+          <b:if cond='data:view.isHomepage'>
+            <!-- Homepage -->
+            <b:include data='this' name='homepage-posts'/>
+          <b:elseif cond='data:view.isPost'/>
+            <!-- Single Post -->
+            <b:loop values='data:posts' var='post'>
               <b:include data='post' name='single-post'/>
-            <b:elseif cond='data:view.isPage'/>
-              <!-- Single Page -->
+            </b:loop>
+          <b:elseif cond='data:view.isPage'/>
+            <!-- Single Page -->
+            <b:loop values='data:posts' var='post'>
               <b:include data='post' name='single-page'/>
-            <b:else/>
-              <!-- Archive/Search -->
-              <b:include data='post' name='archive-posts'/>
-            </b:if>
-          </b:loop>
+            </b:loop>
+          <b:else/>
+            <!-- Archive/Search/Label -->
+            <b:include data='this' name='archive-posts'/>
+          </b:if>
           
           <!-- Pagination -->
           <b:include name='pagination'/>
         </b:includable>
         
         <!-- Homepage Posts Template -->
-        <b:includable id='homepage-posts' var='post'>
+                <b:includable id='homepage-posts' var='this'>
           <b:if cond='data:blog.homepageUrl == data:blog.canonicalUrl'>
-            <!-- First post as featured -->
-            <b:if cond='data:loop.index == 0'>
-              <section class='section'>
-                <div class='container'>
-                  <div class='featured-post reveal'>
-                    <b:if cond='data:post.featuredImage'>
-                      <div class='featured-post__image'>
-                        <img expr:alt='data:post.title' expr:src='data:post.featuredImage resizeImage 800'/>
-                        <span class='featured-post__badge'>Featured</span>
-                      </div>
-                    </b:if>
-                    <div class='featured-post__content'>
-                      <b:if cond='data:post.labels'>
-                        <b:loop values='data:post.labels' var='label' index='i'>
-                          <b:if cond='data:i == 0'>
-                            <span class='featured-post__category'><data:label.name/></span>
-                          </b:if>
-                        </b:loop>
-                      </b:if>
-                      <h2 class='featured-post__title'>
-                        <a expr:href='data:post.url'><data:post.title/></a>
-                      </h2>
-                      <p class='featured-post__excerpt'><data:post.snippet/></p>
-                      <div class='featured-post__meta'>
-                        <span><data:post.author.name/></span>
-                        <span><data:post.date/></span>
-                      </div>
-                      <div style='margin-top: var(--space-lg);'>
-                        <a class='btn btn--primary' expr:href='data:post.url'>Read More</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            <b:else/>
-              <!-- Regular grid of posts -->
-              <b:if cond='data:loop.index == 1'>
+            
+            <!-- Featured Post (Index 0) -->
+            <b:loop values='data:posts' var='post' index='i'>
+              <b:if cond='data:i == 0'>
                 <section class='section'>
                   <div class='container'>
-                    <div class='section-header reveal'>
-                      <span class='section-header__badge'>Latest Updates</span>
-                      <h2 class='section-header__title'>Recent Posts</h2>
-                    </div>
-                    <div class='posts-grid stagger'>
-              </b:if>
-              <article class='blog-post'>
-                <b:if cond='data:post.featuredImage'>
-                  <div class='blog-post__image'>
-                    <img expr:alt='data:post.title' expr:src='data:post.featuredImage resizeImage 600'/>
-                    <b:if cond='data:post.labels'>
-                      <b:loop values='data:post.labels' var='label' index='i'>
-                        <b:if cond='data:i == 0'>
-                          <span class='blog-post__category'><data:label.name/></span>
-                        </b:if>
-                      </b:loop>
-                    </b:if>
-                  </div>
-                </b:if>
-                <div class='blog-post__content'>
-                  <div class='blog-post__meta'>
-                    <span class='blog-post__meta-item'>
-                      <svg fill='none' height='16' stroke='currentColor' viewBox='0 0 24 24' width='16'>
-                        <path d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
-                      </svg>
-                      <time><data:post.date/></time>
-                    </span>
-                    <span class='blog-post__meta-item'>
-                      <svg fill='none' height='16' stroke='currentColor' viewBox='0 0 24 24' width='16'>
-                        <path d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
-                      </svg>
-                      <span>5 min read</span>
-                    </span>
-                  </div>
-                  <h3 class='blog-post__title'>
-                    <a expr:href='data:post.url'><data:post.title/></a>
-                  </h3>
-                  <p class='blog-post__excerpt'><data:post.snippet/></p>
-                  <div class='blog-post__footer'>
-                    <div class='blog-post__author'>
-                      <b:if cond='data:post.author.authorPhoto.image'>
-                        <img class='blog-post__author-avatar' expr:src='data:post.author.authorPhoto.image'/>
+                    <div class='featured-post reveal'>
+                      <b:if cond='data:post.featuredImage'>
+                        <div class='featured-post__image'>
+                          <img expr:alt='data:post.title' expr:src='data:post.featuredImage resizeImage 800'/>
+                          <span class='featured-post__badge'>Featured</span>
+                        </div>
+                      <b:else/>
+                        <div class='featured-post__image featured-post__image--gradient'>
+                          <div class='featured-post__monogram'><data:post.title/></div>
+                          <span class='featured-post__badge'>Featured</span>
+                        </div>
                       </b:if>
-                      <span class='blog-post__author-name'><data:post.author.name/></span>
+                      <div class='featured-post__content'>
+                        <b:if cond='data:post.labels'>
+                          <b:loop values='data:post.labels' var='label' index='lblIndex'>
+                            <b:if cond='data:lblIndex == 0'>
+                              <span class='featured-post__category'><data:label.name/></span>
+                            </b:if>
+                          </b:loop>
+                        </b:if>
+                        <h2 class='featured-post__title'>
+                          <a expr:href='data:post.url'><data:post.title/></a>
+                        </h2>
+                        <p class='featured-post__excerpt'><data:post.snippet/></p>
+                        <div class='featured-post__meta'>
+                          <span><data:post.author.name/></span>
+                          <span><data:post.date/></span>
+                        </div>
+                        <div style='margin-top: var(--space-lg, 24px);'>
+                          <a class='btn btn--primary' expr:href='data:post.url'>Read More</a>
+                        </div>
+                      </div>
                     </div>
-                    <a class='blog-post__link' expr:href='data:post.url'>
-                      Read More
-                      <svg fill='none' height='16' stroke='currentColor' viewBox='0 0 24 24' width='16'>
-                        <path d='M17 8l4 4m0 0l-4 4m4-4H3' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
-                      </svg>
-                    </a>
                   </div>
+                </section>
+              </b:if>
+            </b:loop>
+
+            <!-- Regular Grid of Posts (Index > 0) -->
+            <section class='section'>
+              <div class='container'>
+                <div class='section-header reveal'>
+                  <span class='section-header__badge'>Latest Updates</span>
+                  <h2 class='section-header__title'>Recent Posts</h2>
                 </div>
-              </article>
-              <b:if cond='data:loop.index == data:posts.length - 1'>
+                <div class='posts-grid stagger'>
+                  <b:loop values='data:posts' var='post' index='i'>
+                    <b:if cond='data:i &gt; 0'>
+                      <article class='blog-post'>
+                        <b:if cond='data:post.featuredImage'>
+                          <div class='blog-post__image'>
+                            <img expr:alt='data:post.title' expr:src='data:post.featuredImage resizeImage 600'/>
+                            <b:if cond='data:post.labels'>
+                              <b:loop values='data:post.labels' var='label' index='lblIndex'>
+                                <b:if cond='data:lblIndex == 0'>
+                                  <span class='blog-post__category'><data:label.name/></span>
+                                </b:if>
+                              </b:loop>
+                            </b:if>
+                          </div>
+                        <b:else/>
+                          <div class='blog-post__image blog-post__image--gradient'>
+                            <div class='blog-post__monogram'><data:post.title/></div>
+                            <b:if cond='data:post.labels'>
+                              <b:loop values='data:post.labels' var='label' index='lblIndex'>
+                                <b:if cond='data:lblIndex == 0'>
+                                  <span class='blog-post__category'><data:label.name/></span>
+                                </b:if>
+                              </b:loop>
+                            </b:if>
+                          </div>
+                        </b:if>
+                        <div class='blog-post__content'>
+                          <div class='blog-post__meta'>
+                            <span class='blog-post__meta-item'>
+                              <svg fill='none' height='16' stroke='currentColor' viewBox='0 0 24 24' width='16'>
+                                <path d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
+                              </svg>
+                              <time><data:post.date/></time>
+                            </span>
+                            <span class='blog-post__meta-item'>
+                              <svg fill='none' height='16' stroke='currentColor' viewBox='0 0 24 24' width='16'>
+                                <path d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
+                              </svg>
+                              <span>5 min read</span>
+                            </span>
+                          </div>
+                          <h3 class='blog-post__title'>
+                            <a expr:href='data:post.url'><data:post.title/></a>
+                          </h3>
+                          <p class='blog-post__excerpt'><data:post.snippet/></p>
+                          <div class='blog-post__footer'>
+                            <div class='blog-post__author'>
+                              <b:if cond='data:post.author.authorPhoto.image'>
+                                <img class='blog-post__author-avatar' expr:src='data:post.author.authorPhoto.image'/>
+                              </b:if>
+                              <span class='blog-post__author-name'><data:post.author.name/></span>
+                            </div>
+                            <a class='blog-post__link' expr:href='data:post.url'>
+                              Read More
+                              <svg fill='none' height='16' stroke='currentColor' viewBox='0 0 24 24' width='16'>
+                                <path d='M17 8l4 4m0 0l-4 4m4-4H3' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
+                              </svg>
+                            </a>
+                          </div>
+                        </div>
+                      </article>
+                    </b:if>
+                  </b:loop>
                 </div>
               </div>
             </section>
-              </b:if>
-            </b:if>
+
           </b:if>
         </b:includable>
         
@@ -2283,7 +2400,7 @@ ul, ol {
         </b:includable>
         
         <!-- Archive Posts Template -->
-        <b:includable id='archive-posts' var='post'>
+                <b:includable id='archive-posts' var='this'>
           <section class='section'>
             <div class='container'>
               <div class='section-header reveal'>
@@ -2291,30 +2408,36 @@ ul, ol {
                 <h2 class='section-header__title'>All Posts</h2>
               </div>
               <div class='posts-grid stagger'>
-                <article class='blog-post'>
-                  <b:if cond='data:post.featuredImage'>
-                    <div class='blog-post__image'>
-                      <img expr:alt='data:post.title' expr:src='data:post.featuredImage resizeImage 600'/>
+                <b:loop values='data:posts' var='post'>
+                  <article class='blog-post'>
+                    <b:if cond='data:post.featuredImage'>
+                      <div class='blog-post__image'>
+                        <img expr:alt='data:post.title' expr:src='data:post.featuredImage resizeImage 600'/>
+                      </div>
+                    <b:else/>
+                      <div class='blog-post__image blog-post__image--gradient'>
+                        <div class='blog-post__monogram'><data:post.title/></div>
+                      </div>
+                    </b:if>
+                    <div class='blog-post__content'>
+                      <div class='blog-post__meta'>
+                        <span><data:post.date/></span>
+                      </div>
+                      <h3 class='blog-post__title'>
+                        <a expr:href='data:post.url'><data:post.title/></a>
+                      </h3>
+                      <p class='blog-post__excerpt'><data:post.snippet/></p>
+                      <div class='blog-post__footer'>
+                        <a class='blog-post__link' expr:href='data:post.url'>
+                          Read More
+                          <svg fill='none' height='16' stroke='currentColor' viewBox='0 0 24 24' width='16'>
+                            <path d='M17 8l4 4m0 0l-4 4m4-4H3' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
+                          </svg>
+                        </a>
+                      </div>
                     </div>
-                  </b:if>
-                  <div class='blog-post__content'>
-                    <div class='blog-post__meta'>
-                      <span><data:post.date/></span>
-                    </div>
-                    <h3 class='blog-post__title'>
-                      <a expr:href='data:post.url'><data:post.title/></a>
-                    </h3>
-                    <p class='blog-post__excerpt'><data:post.snippet/></p>
-                    <div class='blog-post__footer'>
-                      <a class='blog-post__link' expr:href='data:post.url'>
-                        Read More
-                        <svg fill='none' height='16' stroke='currentColor' viewBox='0 0 24 24' width='16'>
-                          <path d='M17 8l4 4m0 0l-4 4m4-4H3' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </article>
+                  </article>
+                </b:loop>
               </div>
             </div>
           </section>
@@ -2674,6 +2797,17 @@ document.querySelectorAll('.btn').forEach(function(btn) {
     }, 600);
   });
 });
+
+// Post Monograms fallback generator
+(function() {
+  document.querySelectorAll('.blog-post__monogram, .featured-post__monogram').forEach(function(el) {
+    var text = el.textContent.trim();
+    if (text.length > 0) {
+      el.textContent = text.charAt(0).toUpperCase();
+    }
+  });
+})();
+
 //]]>
   </script>
 </body>
