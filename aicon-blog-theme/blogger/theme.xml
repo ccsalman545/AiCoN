@@ -2087,6 +2087,214 @@ ul, ol {
 .featured-post:hover {
   box-shadow: var(--shadow-xl) !important;
 }
+
+/* ============================================
+   PIXELOS PREMIUM ACCORDION (details/summary)
+   ============================================ */
+.post-single__content details {
+  background: var(--surface2);
+  border-radius: var(--radius-lg);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.3s var(--ease);
+  border: 1px solid var(--border-light);
+}
+
+.post-single__content details[open] {
+  box-shadow: var(--shadow-sm);
+  background: var(--surface);
+}
+
+.post-single__content summary {
+  padding: 18px 24px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--text);
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.post-single__content summary::-webkit-details-marker {
+  display: none;
+}
+
+.post-single__content summary::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23202124'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px;
+  transition: transform 0.3s var(--ease);
+}
+
+[data-theme="dark"] .post-single__content summary::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23e8eaed'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+}
+
+.post-single__content details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.post-single__content details > *:not(summary) {
+  padding: 24px;
+  border-top: 1px solid var(--border-light);
+  color: var(--text2);
+  line-height: 1.8;
+}
+
+/* ============================================
+   PIXELOS CLONED FOOTER STYLES
+   ============================================ */
+.footer {
+  background: var(--surface) !important;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 64px !important;
+  margin-top: 120px;
+  border-top: 1px solid var(--border-light);
+}
+
+.footer__blob {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.25s var(--ease);
+  z-index: 1;
+}
+
+[data-theme="dark"] .footer__blob {
+  opacity: 0.25;
+}
+
+.footer__blob--left {
+  bottom: -40px;
+  left: -40px;
+  width: min(320px, 45vw);
+  height: min(320px, 45vw);
+  color: #c4ae5f; /* Warm sandy-khaki */
+}
+
+.footer__blob--right {
+  bottom: -40px;
+  right: -40px;
+  width: min(350px, 50vw);
+  height: min(350px, 50vw);
+  color: #98d9c2; /* Minty sage-green */
+}
+
+.footer__support {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  max-width: 600px;
+  margin-bottom: 80px;
+}
+
+.footer__support-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 16px;
+  letter-spacing: -0.03em;
+  font-family: var(--font);
+}
+
+.footer__support-text {
+  font-size: 1.125rem;
+  color: var(--text2);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.footer__donation-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.donation-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.25s var(--ease);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  background: #f3df95; /* Warm tan paypal/upi */
+  color: #3e3312;
+  font-family: var(--font);
+  text-decoration: none !important;
+}
+
+.donation-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  opacity: 0.95;
+  color: #3e3312;
+}
+
+.donation-btn__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.footer__bottom-bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-light);
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer__copyright-bar {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text3);
+}
+
+.footer__social-bar {
+  display: flex;
+  gap: 16px;
+}
+
+.footer__social-link-bar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--surface2);
+  color: var(--text2);
+  transition: all 0.25s var(--ease);
+  text-decoration: none !important;
+}
+
+.footer__social-link-bar:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.footer__social-link-bar svg {
+  width: 22px;
+  height: 22px;
+}
 ]]></b:skin>
 </head>
 <body>
@@ -2523,70 +2731,56 @@ ul, ol {
   
   <!-- Footer -->
   <footer class='footer'>
-    <div class='container'>
-      <div class='footer__inner'>
-        <div class='footer__brand'>
-          <div class='footer__logo'>
-            <div class='footer__logo-icon'>A</div>
-            <span><data:blog.title/></span>
-          </div>
-          <p class='footer__description'><data:blog.description/></p>
-          <div class='footer__social'>
-            <a aria-label='Twitter' class='footer__social-link' href='#'>
-              <svg fill='none' height='20' stroke='currentColor' viewBox='0 0 24 24' width='20'>
-                <path d='M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
-              </svg>
-            </a>
-            <a aria-label='GitHub' class='footer__social-link' href='#'>
-              <svg fill='none' height='20' stroke='currentColor' viewBox='0 0 24 24' width='20'>
-                <path d='M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
-              </svg>
-            </a>
-            <a aria-label='LinkedIn' class='footer__social-link' href='#'>
-              <svg fill='none' height='20' stroke='currentColor' viewBox='0 0 24 24' width='20'>
-                <path d='M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/>
-              </svg>
-            </a>
-          </div>
-        </div>
-        
-        <div>
-          <h4 class='footer__heading'>Navigate</h4>
-          <div class='footer__links'>
-            <a class='footer__link' expr:href='data:blog.homepageUrl'>Home</a>
-            <a class='footer__link' href='/p/about.html'>About</a>
-            <a class='footer__link' href='/p/contact.html'>Contact</a>
-          </div>
-        </div>
-        
-        <div>
-          <h4 class='footer__heading'>Categories</h4>
-          <div class='footer__links'>
-            <a class='footer__link' href='/search/label/Technology'>Technology</a>
-            <a class='footer__link' href='/search/label/AI'>AI</a>
-            <a class='footer__link' href='/search/label/Reviews'>Reviews</a>
-          </div>
-        </div>
-        
-        <div>
-          <h4 class='footer__heading'>Legal</h4>
-          <div class='footer__links'>
-            <a class='footer__link' href='/p/privacy-policy.html'>Privacy Policy</a>
-            <a class='footer__link' href='/p/terms.html'>Terms of Service</a>
-            <a class='footer__link' href='/p/disclaimer.html'>Disclaimer</a>
-          </div>
-        </div>
-      </div>
-      
-      <div class='footer__bottom'>
-        <p class='footer__copyright'>&#169; <span id='current-year'>2024</span> <data:blog.title/>. All rights reserved.</p>
-        <div class='footer__bottom-links'>
-          <a class='footer__bottom-link' href='/p/privacy-policy.html'>Privacy</a>
-          <a class='footer__bottom-link' href='/p/terms.html'>Terms</a>
-        </div>
+  <!-- Custom SVG organic background shapes matching screenshots -->
+  <div class='footer__blob footer__blob--left'>
+    <svg viewBox='0 0 400 400' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M0 150C100 120 120 50 180 100C240 150 250 250 150 320C50 390 0 350 0 300V150Z' fill='currentColor'/>
+    </svg>
+  </div>
+  <div class='footer__blob footer__blob--right'>
+    <svg viewBox='0 0 400 400' fill='none' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M150 100C250 80 320 150 350 220C380 290 320 380 220 380C120 380 100 250 100 180C100 110 120 110 150 100Z' fill='currentColor'/>
+    </svg>
+  </div>
+
+  <div class='container'>
+    <div class='footer__support'>
+      <h3 class='footer__support-title'>Support Us</h3>
+      <p class='footer__support-text'>Help keep PixelOS active by donating. Any amount is appreciated.</p>
+      <div class='footer__donation-buttons'>
+        <a class='donation-btn donation-btn--paypal' href='https://paypal.me/' target='_blank'>
+          <svg class='donation-btn__icon' viewBox='0 0 24 24' fill='currentColor'>
+            <path d='M20.007 8.018c-.147-1.125-.45-2.02-.912-2.684-.461-.664-1.09-1.144-1.884-1.442-.795-.297-1.745-.446-2.85-.446H8.5c-.32 0-.603.203-.706.505l-3.23 9.497c-.035.105-.015.22.052.308.067.088.172.139.282.139h3.76l-.1.3c-.15.44-.06.91.24 1.28.3.37.75.59 1.23.59h2.38c.32 0 .603-.203.706-.505l1.01-2.966c.035-.105.015-.22-.052-.308-.067-.088-.172-.139-.282-.139h-2.18l.83-2.438h3.33c.96 0 1.773-.12 2.437-.36 1.1-.4 1.91-1.07 2.43-2 .52-.93.68-2.05.47-3.344z'/>
+          </svg>
+          Paypal
+        </a>
+        <a class='donation-btn donation-btn--upi' href='https://upipayments.co/' target='_blank'>
+          <svg class='donation-btn__icon' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'>
+            <rect x='2' y='5' width='20' height='14' rx='2'/>
+            <path d='M12 11h.01M17 11h.01M7 11h.01'/>
+          </svg>
+          UPI
+        </a>
       </div>
     </div>
-  </footer>
+
+    <div class='footer__bottom-bar'>
+      <p class='footer__copyright-bar'>&#169; <span id='footer-year'>2026</span> PixelOS</p>
+      <div class='footer__social-bar'>
+        <a aria-label='GitHub' class='footer__social-link-bar' href='https://github.com/PixelOS-AOSP' target='_blank'>
+          <svg viewBox='0 0 24 24' fill='currentColor'>
+            <path d='M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.18-1.305.462-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z'/>
+          </svg>
+        </a>
+        <a aria-label='Telegram' class='footer__social-link-bar' href='https://t.me/PixelOSChat' target='_blank'>
+          <svg viewBox='0 0 24 24' fill='currentColor'>
+            <path d='M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.562 8.161c-.18.717-.962 4.084-1.362 5.447-.168.575-.512.747-.831.758-.698.026-1.218-.466-1.884-.799-.861-.43-1.331-.703-2.155-1.127-.954-.491-.336-.76.208-1.304.142-.143 2.625-2.404 2.673-2.599.006-.024.012-.116-.03-.153-.042-.037-.104-.024-.149-.014-.064.015-1.085.679-3.056 2.009-.289.198-.55.295-.785.289-.258-.006-.755-.143-1.125-.262-.281-.092-.506-.14-.486-.296.01-.081.125-.164.343-.249 1.344-.572 4.417-1.897 4.904-2.102.327-.144.597-.197.808-.182.203.014.37.106.495.275.109.149.124.341.092.519z'/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
   
   <!-- Back to Top Button -->
   <a aria-label='Back to top' class='back-to-top' href='#' id='back-to-top'>
@@ -2806,6 +3000,15 @@ document.querySelectorAll('.btn').forEach(function(btn) {
       el.textContent = text.charAt(0).toUpperCase();
     }
   });
+})();
+
+
+// Current Year selector fix
+(function() {
+  var el = document.getElementById('footer-year');
+  if (el) {
+    el.textContent = new Date().getFullYear();
+  }
 })();
 
 //]]>
