@@ -214,4 +214,4 @@ For support, please open an issue on GitHub or contact the theme developer.
 
 ---
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by zahooka
