@@ -104,33 +104,73 @@
   --z-toast: 500;
 }
 
-/* Dark Theme */
+/* PixelOS Warm Theme Colors */
+:root {
+  /* Override with PixelOS warm sand-cream theme */
+  --color-background: #faf6e3;
+  --color-surface: #fffdf6;
+  --color-surface-secondary: #f5f0d7;
+  --color-surface-tertiary: #ede7c8;
+  --color-surface-hover: #f0ebd2;
+  
+  --color-text-primary: #2c2c2c;
+  --color-text-secondary: #5a5a5a;
+  --color-text-tertiary: #808080;
+  --color-text-inverse: #ffffff;
+  
+  --color-accent: #c4ae5f;
+  --color-accent-hover: #b09b4e;
+  --color-accent-light: rgba(196, 174, 95, 0.15);
+  --color-accent-gradient: linear-gradient(135deg, #c4ae5f 0%, #98d9c2 100%);
+  
+  --color-success: #98d9c2;
+  --color-warning: #f3df95;
+  --color-error: #e74c3c;
+  
+  --color-border: #e0d9b8;
+  --color-border-light: #ebe4c8;
+  --color-divider: rgba(0, 0, 0, 0.06);
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 40px rgba(196, 174, 95, 0.2);
+}
+
+/* Dark Theme - Muted with reduced opacity for organic shapes */
 [data-theme="dark"] {
-  --color-background: #0a0a0f;
-  --color-surface: #141419;
-  --color-surface-secondary: #1c1c24;
-  --color-surface-tertiary: #252530;
-  --color-surface-hover: #1f1f2a;
+  --color-background: #1a1a1f;
+  --color-surface: #222229;
+  --color-surface-secondary: #2a2a33;
+  --color-surface-tertiary: #32323d;
+  --color-surface-hover: #2d2d38;
   
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a0a0b0;
-  --color-text-tertiary: #6b6b7b;
-  --color-text-inverse: #0a0a0f;
+  --color-text-primary: #e8e8e8;
+  --color-text-secondary: #a8a8b8;
+  --color-text-tertiary: #707080;
+  --color-text-inverse: #1a1a1f;
   
-  --color-accent: #4d9fff;
-  --color-accent-hover: #66aaff;
-  --color-accent-light: rgba(77, 159, 255, 0.15);
-  --color-accent-gradient: linear-gradient(135deg, #4d9fff 0%, #00d4ff 100%);
+  --color-accent: #c4ae5f;
+  --color-accent-hover: #d4be6f;
+  --color-accent-light: rgba(196, 174, 95, 0.2);
+  --color-accent-gradient: linear-gradient(135deg, #c4ae5f 0%, #98d9c2 100%);
   
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-light: rgba(255, 255, 255, 0.04);
-  --color-divider: rgba(255, 255, 255, 0.06);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-light: rgba(255, 255, 255, 0.05);
+  --color-divider: rgba(255, 255, 255, 0.08);
   
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 40px rgba(77, 159, 255, 0.2);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 40px rgba(196, 174, 95, 0.3);
+}
+
+/* Organic Blob Shapes Opacity for Dark Mode */
+[data-theme="dark"] .footer__blob--left,
+[data-theme="dark"] .footer__blob--right {
+  opacity: 0.15;
 }
 
 /* ============================================
@@ -1268,13 +1308,46 @@ ul, ol {
 }
 
 /* ============================================
-   FOOTER
+   FOOTER WITH ORGANIC BLOB CORNERS
    ============================================ */
 
 .footer {
   background: var(--color-surface);
   border-top: 1px solid var(--color-border-light);
   padding: var(--space-3xl) 0 var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Organic Blob Corner Backgrounds */
+.footer__blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.footer__blob--left {
+  bottom: -100px;
+  left: -100px;
+  background: radial-gradient(ellipse at center, #c4ae5f 0%, transparent 70%);
+  border-radius: 50% 70% 60% 40% / 40% 60% 70% 50%;
+  opacity: 0.25;
+}
+
+.footer__blob--right {
+  bottom: -100px;
+  right: -100px;
+  background: radial-gradient(ellipse at center, #98d9c2 0%, transparent 70%);
+  border-radius: 60% 40% 50% 70% / 70% 50% 40% 60%;
+  opacity: 0.25;
+}
+
+.footer__inner {
+  position: relative;
+  z-index: 1;
 }
 
 .footer__inner {
@@ -1768,6 +1841,226 @@ ul, ol {
   .newsletter {
     padding: var(--space-xl);
   }
+}
+
+/* ============================================
+   SUPPORT US SECTION & PILL DONATION BUTTONS
+   ============================================ */
+
+.support-us {
+  padding: var(--space-section) 0;
+  text-align: center;
+  position: relative;
+}
+
+.support-us__title {
+  font-size: var(--text-h2);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+  letter-spacing: var(--tracking-tight);
+}
+
+.support-us__text {
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto var(--space-xl);
+  line-height: var(--leading-relaxed);
+}
+
+.support-us__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Pill Donation Buttons */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 16px 32px;
+  background: #f3df95;
+  color: #2c2c2c;
+  font-weight: 600;
+  font-size: var(--text-small);
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-out);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  min-height: 56px;
+}
+
+.pill-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  background: #f0d97d;
+  color: #2c2c2c;
+  text-decoration: none;
+}
+
+.pill-btn:active {
+  transform: translateY(-1px);
+}
+
+.pill-btn svg,
+.pill-btn img {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.pill-btn--upi {
+  background: #f3df95;
+}
+
+.pill-btn--paypal {
+  background: #f3df95;
+}
+
+/* Dark Theme Adjustments for Pill Buttons */
+[data-theme="dark"] .pill-btn {
+  background: #c4ae5f;
+  color: #1a1a1f;
+}
+
+[data-theme="dark"] .pill-btn:hover {
+  background: #d4be6f;
+}
+
+/* ============================================
+   PREMIUM NATIVE ACCORDIONS (COLLAPSIBLE PANELS)
+   ============================================ */
+
+/* Style for <details> and <summary> tags */
+details {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-md);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+details:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+}
+
+details[open] {
+  background: var(--color-surface-secondary);
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  font-weight: 600;
+  font-size: var(--text-h3);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Custom Chevron Icon */
+summary::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--color-text-secondary);
+  border-bottom: 2px solid var(--color-text-secondary);
+  transform: rotate(45deg);
+  transition: transform var(--duration-normal) var(--ease-out);
+  flex-shrink: 0;
+  margin-left: var(--space-md);
+}
+
+details[open] summary::after {
+  transform: rotate(-135deg);
+  border-color: var(--color-accent);
+}
+
+summary:hover {
+  color: var(--color-accent);
+}
+
+summary:focus {
+  outline: none;
+  background: var(--color-surface-hover);
+}
+
+summary:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+}
+
+/* Accordion Content */
+details > *:not(summary) {
+  padding: 0 var(--space-lg) var(--space-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  animation: accordionSlide 0.3s var(--ease-out);
+}
+
+@keyframes accordionSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+details p {
+  margin-bottom: var(--space-md);
+}
+
+details p:last-child {
+  margin-bottom: 0;
+}
+
+details ul,
+details ol {
+  margin: var(--space-md) 0;
+  padding-left: var(--space-xl);
+}
+
+details li {
+  margin-bottom: var(--space-sm);
+  list-style: disc;
+}
+
+details ol li {
+  list-style: decimal;
+}
+
+/* ============================================
+   POST SINGLE CONTENT - ACCORDION INTEGRATION
+   ============================================ */
+
+.post-single__content details {
+  margin: var(--space-lg) 0;
+}
+
+.post-single__content summary {
+  font-size: var(--text-body);
+  font-weight: 600;
 }
 
 /* ============================================
